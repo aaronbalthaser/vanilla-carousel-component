@@ -17,3 +17,8 @@ yarn dev OR npm dev
 ```
 yarn build OR npm build
 ```
+
+## ESLint
+```
+yarn lint OR npm lint
+```
