@@ -1,0 +1,3 @@
+{{ for(let obj of it) { }}
+  <div>{{=obj.name}}</div>
+{{ } }}
