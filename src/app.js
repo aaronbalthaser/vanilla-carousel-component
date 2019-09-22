@@ -20,16 +20,10 @@ import './app.scss';
   body.appendChild(header);
   body.appendChild(navigation);
 
-  let main = element({
+  element({
     name: 'main',
     id: 'main',
     node: body
-  });
-
-  let nav = element({
-    name: 'nav',
-    id: 'navigation',
-    node: main
   });
 
   // Router:

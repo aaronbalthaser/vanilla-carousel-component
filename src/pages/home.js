@@ -14,14 +14,12 @@ export const HomePage = (template) => {
 
   page.render();
 
-  let imagesData = [];
+  const imagesData = [];
+  const url = constants.imageUrl;
 
   for (let i = 0; i < 8; i++) {
-    let num = i + 1;
-
-
     imagesData.push({
-      url: 'https://placeimg.com/1200/400/any',
+      url: url,
       author: 'Aaron Balthaser'
     });
   }
