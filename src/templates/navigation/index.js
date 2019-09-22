@@ -1,10 +1,9 @@
-import dot from 'dot';
+import bindData from '../bindData';
+
 import template from './navigation.txt';
 
-const TemplateNavigation = (data) => {
-  const templateFunction = dot.template(template);
-
-  return templateFunction(data);
+const TemplateNavigation = (options) => {
+  return bindData(template, options);
 };
 
 export default TemplateNavigation;

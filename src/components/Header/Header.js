@@ -1,10 +1,10 @@
 import { Component } from '../Component';
 
 const DEFAULTS = {
-  containerId: 'carousel-container'
+  containerId: 'body'
 };
 
-export class Carousel extends Component {
+export class Header extends Component {
   constructor(options) {
     super(options);
   }
@@ -12,10 +12,4 @@ export class Carousel extends Component {
   render() {
     super.render.apply(this, arguments);
   }
-
-  show() {
-    super.show.apply(this, arguments);
-  }
 }
-
-Carousel.DEFAULTS = DEFAULTS;

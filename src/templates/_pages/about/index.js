@@ -1,10 +1,9 @@
-import dot from 'dot';
+import bindData from '../../bindData';
+
 import template from './about.txt';
 
-const TemplateAboutPage = (data) => {
-  const templateFunction = dot.template(template);
-
-  return templateFunction(data);
+const TemplateAboutPage = (options) => {
+  return bindData(template, options);
 };
 
 export default TemplateAboutPage;

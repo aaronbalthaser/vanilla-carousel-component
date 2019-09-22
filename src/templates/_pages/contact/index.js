@@ -1,10 +1,9 @@
-import dot from 'dot';
+import bindData from '../../bindData';
+
 import template from './contact.txt';
 
-const TemplateContactPage = (data) => {
-  const templateFunction = dot.template(template);
-
-  return templateFunction(data);
+const TemplateContactPage = (options) => {
+  return bindData(template, options);
 };
 
 export default TemplateContactPage;

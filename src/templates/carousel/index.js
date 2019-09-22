@@ -1,10 +1,9 @@
-import dot from 'dot';
+import bindData from '../bindData';
+
 import template from './carousel.txt';
 
-const TemplateCarousel = (data) => {
-  const templateFunction = dot.template(template);
-
-  return templateFunction(data);
+const TemplateCarousel = (options) => {
+  return bindData(template, options);
 };
 
 export default TemplateCarousel;

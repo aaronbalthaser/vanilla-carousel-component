@@ -14,12 +14,6 @@ export class Renderer {
     this.namespace = this.options.namespace || this.name.toLowerCase();
     this.template = this.options.template;
 
-    // console.log('containerId ', this.containerId);
-    // console.log('container ', this.container);
-    // console.log('name ', this.name);
-    // console.log('namespace ', this.namespace);
-    // console.log('template ', this.template);
-
     this.rendered = false;
   }
 

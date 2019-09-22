@@ -1,10 +1,9 @@
-import dot from 'dot';
+import bindData from '../../bindData';
+
 import template from './home.txt';
 
-const TemplateHomePage = (data) => {
-  const templateFunction = dot.template(template);
-
-  return templateFunction(data);
+const TemplateHomePage = (options) => {
+  return bindData(template, options);
 };
 
 export default TemplateHomePage;

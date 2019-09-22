@@ -12,24 +12,27 @@ export const HomePage = (template) => {
     template: template
   });
 
-  let random = Math.max(Math.floor(Math.random() * 12), 6);
-
   page.render();
 
-  fetch(constants.slideImages + random)
-    .then((response) => response.json())
-    .then(data => {
+  let imagesData = [];
 
-      const carousel = new Carousel({
-        template: TemplateCarousel(data),
-        containerId: 'carousel'
-      });
+  for (let i = 0; i < 8; i++) {
+    let num = i + 1;
 
-      carousel.render();
 
-      carousel.show();
-
+    imagesData.push({
+      url: 'https://placeimg.com/1200/400/any',
+      author: 'Aaron Balthaser'
     });
+  }
+
+  const carousel = new Carousel({
+    template: TemplateCarousel({ data: imagesData }),
+    containerId: 'carousel'
+  });
+
+  carousel.render();
+  carousel.show();
 
   page.show();
 };

@@ -1,6 +1,7 @@
 import { element } from './utils';
 import { Router } from './Router';
 
+import TemplateHeader from './templates/header';
 import TemplateNavigation from './templates/navigation';
 import TemplateHomePage from './templates/_pages/home';
 import TemplateAboutPage from './templates/_pages/about';
@@ -12,8 +13,12 @@ import './app.scss';
 
 (function () {
   const body = document.querySelector('body');
+  const header = TemplateHeader({ nodes: true });
+  const navigation = TemplateNavigation({ nodes: true });
 
   body.id = 'body';
+  body.appendChild(header);
+  body.appendChild(navigation);
 
   let main = element({
     name: 'main',
@@ -26,9 +31,6 @@ import './app.scss';
     id: 'navigation',
     node: main
   });
-
-  nav.innerHTML = TemplateNavigation();
-  body.appendChild(nav);
 
   // Router:
   const router = new Router();
@@ -57,5 +59,4 @@ import './app.scss';
 
   window.addEventListener('load', routerHandler);
   window.addEventListener('hashchange', routerHandler);
-
 }());
