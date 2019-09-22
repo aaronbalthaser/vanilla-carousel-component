@@ -1,3 +1,5 @@
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import { element } from './utils';
 import { Router } from './Router';
 
