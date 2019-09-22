@@ -38,11 +38,11 @@ import './app.scss';
   });
 
   router.route('/about', 'about', () => {
-    AboutPage(TemplateAboutPage);
+    AboutPage(TemplateAboutPage());
   });
 
   router.route('/contact', 'contact', () => {
-    ContactPage(TemplateContactPage);
+    ContactPage(TemplateContactPage());
   });
 
   function routerHandler() {

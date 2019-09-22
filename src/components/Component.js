@@ -1,75 +1,26 @@
-const DEFAULTS = {
-  containerId: '',
-  template: '',
-  parentSelector: '',
-  hiddenClass: 'hidden'
-};
+import { Renderer } from '../components';
 
-export class Component {
+const DEFAULTS = {};
+
+export class Component extends Renderer {
   constructor(options) {
-    this._options(options);
-
-    this.containerId = this.options.containerId;
-    this.name = this.options.name || Object.getPrototypeOf(this).constructor.name;
-    this.namespace = this.options.namespace || this.name.toLowerCase();
-    this.template = this.options.template;
-
-    if (this.options.parentSelector) {
-      this.container = document.querySelector(this.options.parentSelector);
-    } else {
-      this.container = this.options.template.getElementById(this.containerId);
-    }
-    console.log(this.container);
-    this.rendered = false;
+    super(options);
   }
 
   render() {
-    // console.log('Component render');
-    this.hide();
-
-    this.renderTemplate.apply(this, arguments);
-    this.postRender.apply(this, arguments);
-    this.rendered = true;
+    super.render.apply(this, arguments);
   }
 
   postRender() {
-    // console.log('Component postRender');
-    if (!this.rendered) {
-      this.renderOnce.apply(this, arguments);
-    }
-  }
-
-  renderTemplate() {
-    // console.log('Component renderTemplate');
-
+    super.postRender();
   }
 
   renderOnce() {
-    // console.log('Component renderOnce');
-    this.initializeEvents();
-    this.renderOnce = () => { };
+    super.renderOnce();
   }
-
-  initializeEvents() { }
 
   show() {
-    // console.log('Component show');
-    this.container.classList.remove(this.options.hiddenClass);
-    this.container.setAttribute('aria-hidden', false);
-  }
-
-  hide() {
-    // console.log('Component hide');
-    this.container.classList.add(this.options.hiddenClass);
-    this.container.setAttribute('aria-hidden', true);
-  }
-
-  _options(options) {
-    this.options = Object.assign({}, DEFAULTS, this._defaults(), options || {});
-  }
-
-  _defaults() {
-    return Object.getPrototypeOf(this).constructor.DEFAULTS;
+    super.show.apply(this, arguments);
   }
 }
 

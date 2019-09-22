@@ -1,5 +1,5 @@
-import { Component } from './components';
+import { Renderer } from './';
 
-export class Carousel extends Component {
+export class Carousel extends Renderer {
 
 }

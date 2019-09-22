@@ -19,14 +19,16 @@ export const HomePage = (template) => {
   fetch(constants.slideImages + random)
     .then((response) => response.json())
     .then(data => {
-      // Setup Carousel
-      // console.log(TemplateCarousel(data));
-      // const carousel = new Carousel({
-      //   template: TemplateCarousel(data),
-      //   containerId: 'carousel-container'
-      // });
 
-      // carousel.render();
+      const carousel = new Carousel({
+        template: TemplateCarousel(data),
+        containerId: 'carousel'
+      });
+
+      carousel.render();
+
+      carousel.show();
+
     });
 
   page.show();
