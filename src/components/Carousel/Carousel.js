@@ -1,11 +1,8 @@
 import { Component } from '../Component';
 
-import debounce from '../../utils/debounce';
-
 import './Carousel.scss';
 
 import constants from '../../constants';
-import { clearInterval } from 'timers';
 
 const DEFAULTS = {
   containerId: 'carousel'
