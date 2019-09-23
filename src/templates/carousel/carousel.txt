@@ -5,16 +5,20 @@
   </div>
 {{ } }}
   <div class="slide-controls">
-    <div class="lt-slide-control-container">
-      <span class="lt"><i class="fas fa-chevron-left"></i></span>
+    <div data-direction="lt" class="lt-slide-control-container">
+      <span data-direction="lt" class="lt">
+        <i data-direction="lt" class="fas fa-chevron-left"></i>
+      </span>
     </div>
-    <div class="rt-slide-control-container">
-      <span class="rt"><i class="fas fa-chevron-right"></i></span>
+    <div data-direction="rt" class="rt-slide-control-container">
+      <span data-direction="rt" class="rt">
+        <i data-direction="rt" class="fas fa-chevron-right"></i>
+      </span>
     </div>
   </div>
   <div class="slide-dots">
-    {{ for(let obj of it) { }}
-      <span class="slide-dot"></span>
+    {{ for(var i=0; i < it.length; i++) { }}
+      <span data-index="{{=i}}" class="slide-dot"></span>
     {{ } }}
   </div>
 </div>

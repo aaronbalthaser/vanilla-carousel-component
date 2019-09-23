@@ -1,7 +1,8 @@
 const DEFAULTS = {
   containerId: '',
   template: '',
-  hiddenClass: 'hidden'
+  hiddenClass: 'hidden',
+  name: ''
 };
 
 export class Renderer {

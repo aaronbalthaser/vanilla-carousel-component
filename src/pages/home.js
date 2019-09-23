@@ -26,7 +26,9 @@ export const HomePage = (template) => {
 
   const carousel = new Carousel({
     template: TemplateCarousel({ data: imagesData }),
-    containerId: 'carousel'
+    componentSelector: '.slide-container',
+    auto: true,
+    delay: 3000
   });
 
   carousel.render();
