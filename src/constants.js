@@ -4,12 +4,13 @@ const constants = {
   // Carousel
   slidesSelector: '.slide',
   slideDotsSelector: '.slide-dots',
-  slideActiveClass: 'active',
   slideControls: '.slide-controls',
   slideControlDirLt: 'lt',
   slideControlDirRt: 'rt',
+  slideDotSelector: '.slide-dot',
   direction: 'direction',
-  index: 'index'
+  index: 'index',
+  active: 'active'
 };
 
 export default constants;

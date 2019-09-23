@@ -21,10 +21,6 @@ export class Carousel extends Component {
     this.delay = delay || 5000;
     this.activeSlide = 0;
     this.side = null;
-
-    // mothod bindings
-    this.mouseOverHandler = this.mouseOverHandler.bind(this);
-    this.mouseOverHandler = debounce(this.mouseOverHandler, 20);
   }
 
   render() {
@@ -32,10 +28,12 @@ export class Carousel extends Component {
 
     this.componentContainer = document.querySelector(this.componentSelector);
     this.slides = document.querySelectorAll(constants.slidesSelector);
-    this.slides[this.activeSlide].classList.add(constants.slideActiveClass);
+    this.slides[this.activeSlide].classList.add(constants.active);
     this.length = this.slides.length;
     this.ltControl = document.querySelector(constants.sliedLtControl);
     this.rtControl = document.querySelector(constants.slideRtControl);
+    this.dots = document.querySelectorAll(constants.slideDotSelector);
+    this.dots[0].classList.add(constants.active);
   }
 
   show() {
@@ -46,11 +44,8 @@ export class Carousel extends Component {
     this.controls = document.querySelector(constants.slideControls);
     this.controls.addEventListener('click', this.controlsHandler.bind(this));
 
-    this.dots = document.querySelector(constants.slideDotsSelector);
-    this.dots.addEventListener('click', this.dotNavigationHandler.bind(this));
-
-    this.componentContainer = this.componentContainer || document.querySelector(this.componentSelector);
-    this.componentContainer.addEventListener('mousemove', this.mouseOverHandler.bind(this));
+    this.dotsContainer = document.querySelector(constants.slideDotsSelector);
+    this.dotsContainer.addEventListener('click', this.dotNavigationHandler.bind(this));
   }
 
   // Carousel methods:
@@ -68,16 +63,15 @@ export class Carousel extends Component {
     }
   }
 
-  mouseOverHandler(event) {
-    console.log('mouse over handler');
-  }
-
   dotNavigationHandler(event) {
-    if (event && event.target) {
-      let index = event.target.dataset[constants.index];
+    if (event && event.target && event.target.getAttribute('data-index')) {
+      this.activeSlide = parseInt(event.target.dataset[constants.index]);
 
-      this.removeActiveClass();
-      this.updateSlide(index);
+      this.removeSlideActiveClass();
+      this.updateSlideActiveClass(this.activeSlide);
+
+      this.removeDotActiveClass();
+      this.updateDotActiveClass(this.activeSlide);
     }
   }
 
@@ -88,8 +82,11 @@ export class Carousel extends Component {
       this.activeSlide--;
     }
 
-    this.removeActiveClass();
-    this.updateSlide(this.activeSlide);
+    this.removeSlideActiveClass();
+    this.updateSlideActiveClass(this.activeSlide);
+
+    this.removeDotActiveClass();
+    this.updateDotActiveClass(this.activeSlide);
   }
 
   goForward() {
@@ -99,18 +96,31 @@ export class Carousel extends Component {
       this.activeSlide++;
     }
 
-    this.removeActiveClass();
-    this.updateSlide(this.activeSlide);
+    this.removeSlideActiveClass();
+    this.updateSlideActiveClass(this.activeSlide);
+
+    this.removeDotActiveClass();
+    this.updateDotActiveClass(this.activeSlide);
   }
 
-  removeActiveClass() {
-    this.slides.forEach(slide => {
-      slide.classList.remove('active');
+  removeDotActiveClass() {
+    this.dots.forEach(dot => {
+      dot.classList.remove(constants.active);
     });
   }
 
-  updateSlide(slide) {
-    this.slides[slide].classList.add(constants.slideActiveClass);
+  updateDotActiveClass(dot) {
+    this.dots[dot].classList.add(constants.active)
+  }
+
+  removeSlideActiveClass() {
+    this.slides.forEach(slide => {
+      slide.classList.remove(constants.active);
+    });
+  }
+
+  updateSlideActiveClass(slide) {
+    this.slides[slide].classList.add(constants.active);
   }
 }
 
