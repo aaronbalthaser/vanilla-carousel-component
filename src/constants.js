@@ -10,7 +10,8 @@ const constants = {
   slideDotSelector: '.slide-dot',
   direction: 'direction',
   index: 'index',
-  active: 'active'
+  active: 'active',
+  delay: 3000
 };
 
 export default constants;

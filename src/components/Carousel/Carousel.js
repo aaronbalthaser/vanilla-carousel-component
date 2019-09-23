@@ -5,6 +5,7 @@ import debounce from '../../utils/debounce';
 import './Carousel.scss';
 
 import constants from '../../constants';
+import { clearInterval } from 'timers';
 
 const DEFAULTS = {
   containerId: 'carousel'
@@ -14,13 +15,16 @@ export class Carousel extends Component {
   constructor(options) {
     super(options);
 
-    const { componentSelector, auto, delay } = options;
+    const { componentSelector, auto, timeout, delay } = options;
 
     this.componentSelector = componentSelector;
     this.auto = auto;
-    this.delay = delay || 5000;
-    this.activeSlide = 0;
+    this.timeout = timeout || 0
+    this.delay = delay || constants.delay;
+    this.index = 0;
     this.side = null;
+    this.interval = null;
+    this.intervalTimeout = timeout || 0;
   }
 
   render() {
@@ -28,16 +32,37 @@ export class Carousel extends Component {
 
     this.componentContainer = document.querySelector(this.componentSelector);
     this.slides = document.querySelectorAll(constants.slidesSelector);
-    this.slides[this.activeSlide].classList.add(constants.active);
+    this.slides[this.index].classList.add(constants.active);
     this.length = this.slides.length;
     this.ltControl = document.querySelector(constants.sliedLtControl);
     this.rtControl = document.querySelector(constants.slideRtControl);
     this.dots = document.querySelectorAll(constants.slideDotSelector);
-    this.dots[0].classList.add(constants.active);
+    this.dots[this.index].classList.add(constants.active);
   }
 
   show() {
     super.show.apply(this, arguments);
+
+    if (this.auto) {
+      this.autoSlide();
+    }
+
+    if (this.intervalTimeout) {
+      this.autoStop();
+    }
+  }
+
+  autoSlide() {
+    this.interval = setInterval(() => {
+      this.goForward();
+    }, this.delay);
+  }
+
+  autoStop() {
+    this.intervalTimeout = setTimeout(() => {
+      window.clearInterval(this.interval);
+      window.clearTimeout(this.intervalTimeout);
+    }, this.intervalTimeout);
   }
 
   initializeEvents() {
@@ -65,42 +90,42 @@ export class Carousel extends Component {
 
   dotNavigationHandler(event) {
     if (event && event.target && event.target.getAttribute('data-index')) {
-      this.activeSlide = parseInt(event.target.dataset[constants.index]);
+      this.index = parseInt(event.target.dataset[constants.index]);
 
       this.removeSlideActiveClass();
-      this.updateSlideActiveClass(this.activeSlide);
+      this.updateSlideActiveClass(this.index);
 
       this.removeDotActiveClass();
-      this.updateDotActiveClass(this.activeSlide);
+      this.updateDotActiveClass(this.index);
     }
   }
 
   goBack() {
-    if (this.activeSlide < 1) {
-      this.activeSlide = this.length - 1;
+    if (this.index < 1) {
+      this.index = this.length - 1;
     } else {
-      this.activeSlide--;
+      this.index--;
     }
 
     this.removeSlideActiveClass();
-    this.updateSlideActiveClass(this.activeSlide);
+    this.updateSlideActiveClass(this.index);
 
     this.removeDotActiveClass();
-    this.updateDotActiveClass(this.activeSlide);
+    this.updateDotActiveClass(this.index);
   }
 
   goForward() {
-    if (this.activeSlide === this.length - 1) {
-      this.activeSlide = 0;
+    if (this.index === this.length - 1) {
+      this.index = 0;
     } else {
-      this.activeSlide++;
+      this.index++;
     }
 
     this.removeSlideActiveClass();
-    this.updateSlideActiveClass(this.activeSlide);
+    this.updateSlideActiveClass(this.index);
 
     this.removeDotActiveClass();
-    this.updateDotActiveClass(this.activeSlide);
+    this.updateDotActiveClass(this.index);
   }
 
   removeDotActiveClass() {
